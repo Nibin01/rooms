@@ -1,9 +1,9 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
+# -*- coding: utf-8 -*-
+# --------------------------------------------------------------------------
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2012-Today Serpent Consulting Services Pvt. Ltd. (<http://www.serpentcs.com>)
-#    Copyright (C) 2004 OpenERP SA (<http://www.openerp.com>)
+#    Copyright (C) 2012-Today Serpent Consulting Services PVT. LTD.
+#    (<http://www.serpentcs.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,11 +18,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>
 #
-##############################################################################
+# ---------------------------------------------------------------------------
 
-from openerp import models,fields,api
+from openerp import models, fields, api
 
-class wizard_hotel_restaurant(models.TransientModel):
+
+class WizardHotelRestaurant(models.TransientModel):
 
     _name = 'wizard.hotel.restaurant'
 
@@ -36,8 +37,40 @@ class wizard_hotel_restaurant(models.TransientModel):
             'model': 'hotel.restaurant.reservation',
             'form': self.read(['date_start', 'date_end'])[0]
         }
-        return self.env['report'].get_action(self, 'hotel_restaurant.report_res_table',data=data)
+        return self.env['report'
+                        ].get_action(self,
+                                     'hotel_restaurant.report_res_table',
+                                     data=data)
 
-wizard_hotel_restaurant()
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+class FolioRestReservation(models.TransientModel):
+    _name = 'folio.rest.reservation'
+    _rec_name = 'date_start'
+
+    date_start = fields.Datetime('Start Date')
+    date_end = fields.Datetime('End Date')
+    check = fields.Boolean('With Details')
+
+    @api.multi
+    def print_rest_report(self):
+        data = {
+            'ids': self.ids,
+            'model': 'hotel.folio',
+            'form': self.read(['date_start', 'date_end', 'check'])[0]
+        }
+        return self.env['report'
+                        ].get_action(self,
+                                     'hotel_restaurant.report_rest_order',
+                                     data=data)
+
+    @api.multi
+    def print_reserv_report(self):
+        data = {
+            'ids': self.ids,
+            'model': 'hotel.folio',
+            'form': self.read(['date_start', 'date_end', 'check'])[0]
+        }
+        return self.env['report'
+                        ].get_action(self,
+                                     'hotel_restaurant.report_reserv_order',
+                                     data=data)

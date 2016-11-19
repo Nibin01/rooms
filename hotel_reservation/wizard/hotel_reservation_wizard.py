@@ -1,9 +1,9 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
+# -*- coding: utf-8 -*-
+# --------------------------------------------------------------------------
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2012-Today Serpent Consulting Services Pvt. Ltd. (<http://www.serpentcs.com>)
-#    Copyright (C) 2004 OpenERP SA (<http://www.openerp.com>)
+#    Copyright (C) 2012-Today Serpent Consulting Services PVT. LTD.
+#    (<http://www.serpentcs.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,11 +18,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>
 #
-##############################################################################
+# ---------------------------------------------------------------------------
 
-from openerp import models,fields,api
+from openerp import models, fields, api
 
-class hotel_reservation_wizard(models.TransientModel):
+
+class HotelReservationWizard(models.TransientModel):
 
     _name = 'hotel.reservation.wizard'
 
@@ -34,39 +35,51 @@ class hotel_reservation_wizard(models.TransientModel):
         data = {
             'ids': self.ids,
             'model': 'hotel.reservation',
-            'form': self.read(['date_start','date_end'])[0]
+            'form': self.read(['date_start', 'date_end'])[0]
         }
-        return self.env['report'].get_action(self, 'hotel_reservation.report_roomres_qweb',data=data)
+        return self.env['report'
+                        ].get_action(self,
+                                     'hotel_reservation.report_roomres_qweb',
+                                     data=data)
 
     @api.multi
     def report_checkin_detail(self):
         data = {
             'ids': self.ids,
             'model': 'hotel.reservation',
-            'form': self.read(['date_start','date_end'])[0],
+            'form': self.read(['date_start', 'date_end'])[0],
         }
-        return self.env['report'].get_action(self, 'hotel_reservation.report_checkin_qweb',data=data)
+        return self.env['report'
+                        ].get_action(self,
+                                     'hotel_reservation.report_checkin_qweb',
+                                     data=data)
 
     @api.multi
     def report_checkout_detail(self):
         data = {
             'ids': self.ids,
             'model': 'hotel.reservation',
-            'form': self.read(['date_start','date_end'])[0]
+            'form': self.read(['date_start', 'date_end'])[0]
         }
-        return self.env['report'].get_action(self, 'hotel_reservation.report_checkout_qweb',data=data)
+        return self.env['report'
+                        ].get_action(self,
+                                     'hotel_reservation.report_checkout_qweb',
+                                     data=data)
 
     @api.multi
     def report_maxroom_detail(self):
         data = {
             'ids': self.ids,
             'model': 'hotel.reservation',
-            'form': self.read(['date_start','date_end'])[0]
+            'form': self.read(['date_start', 'date_end'])[0]
         }
-        return self.env['report'].get_action(self,'hotel_reservation.report_maxroom_qweb',data=data)
+        return self.env['report'
+                        ].get_action(self,
+                                     'hotel_reservation.report_maxroom_qweb',
+                                     data=data)
 
 
-class make_folio_wizard(models.TransientModel):
+class MakeFolioWizard(models.TransientModel):
 
     _name = 'wizard.make.folio'
 
@@ -88,6 +101,3 @@ class make_folio_wizard(models.TransientModel):
             'view_id': False,
             'type': 'ir.actions.act_window'
         }
-
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
