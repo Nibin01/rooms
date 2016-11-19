@@ -3,19 +3,18 @@
     _lt = openerp.web._lt;
     var QWeb = openerp.web.qweb;
     
-    console.log("asdasdasdasdasdas");
     openerp.hotel_reservation.RoomSummary = openerp.web.form.FormWidget.extend(openerp.web.form.ReinitializeWidgetMixin, {
-    	
-    	display_name: _lt('Form'),
+
+        display_name: _lt('Form'),
         view_type: "form",
         
         init: function() {
             this._super.apply(this, arguments);
-	    	if(this.field_manager.model == "room.reservation.summary")
-	    	{
-	    		$(".oe_view_manager_buttons").hide();
-	    		$(".oe_view_manager_header").hide();
-	   		}
+           if(this.field_manager.model == "room.reservation.summary")
+            {
+                $(".oe_view_manager_buttons").hide();
+                $(".oe_view_manager_header").hide();
+            }
             this.set({
                 date_to: false,
                 date_from: false,
@@ -48,14 +47,14 @@
         },
         
       initialize_content: function() {
-    	   var self = this;
+           var self = this;
            if (self.setting)
                return;
            
            if (!this.summary_header || !this.room_summary)
-              	return
+                return;
            // don't render anything until we have summary_header and room_summary
-              	
+              
            this.destroy_content();
            
            if (this.get("summary_header")) {
@@ -64,7 +63,7 @@
            if (this.get("room_summary")) {
             this.room_summary = py.eval(this.get("room_summary"));
            }
-           	
+           
            this.renderElement();
            this.view_loading();
         },
@@ -85,7 +84,7 @@
                         context: {"room_id": $(this).attr("data"), 'date': $(this).attr("date")},
                 });
             });
-        
+
         },
        
         renderElement: function() {
@@ -94,6 +93,21 @@
         }     
     });
 
+    openerp.web.FormView.include({
+         can_be_discarded: function() {
+        if (this.$el.is('.oe_form_dirty')) {
+            if (this.model == 'room.reservation.summary') {
+                this.$el.removeClass('oe_form_dirty');
+                return true;
+            }
+            if (!confirm(_t("Warning, the record has been modified, your changes will be discarded.\n\nAre you sure you want to leave this page ?"))) {
+                return false;
+            }
+            this.$el.removeClass('oe_form_dirty');
+        }
+        return true;
+    },
+    });
     openerp.web.form.custom_widgets.add('Room_Reservation', 'openerp.hotel_reservation.RoomSummary');
 };
 
