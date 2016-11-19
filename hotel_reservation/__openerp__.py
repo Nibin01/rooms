@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+# --------------------------------------------------------------------------
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2012-Today Serpent Consulting Services Pvt. Ltd. (<http://www.serpentcs.com>)
-#    Copyright (C) 2004 OpenERP SA (<http://www.openerp.com>)
+#    Copyright (C) 2012-Today Serpent Consulting Services PVT. LTD.
+#    (<http://www.serpentcs.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,25 +18,22 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>
 #
-##############################################################################
+# ---------------------------------------------------------------------------
 
 {
-    "name" : "Hotel Reservation Management",
-    "version" : "0.07",
-    "author": ["Serpent Consulting Services Pvt. Ltd.", "OpenERP SA" ],
-    "category" : "Generic Modules/Hotel Reservation",
-    "description": """
-    Module for Hotel/Resort/Property management. You can manage:
-    * Guest Reservation
-    * Group Reservartion
-      Different reports are also provided, mainly for hotel statistics.
-    """,
-    "website": ["http://www.serpentcs.com", "http://www.openerp.com"],
-    "depends" : ["hotel", "stock", "report_extended",'mail','email_template',],
-    "demo" : [
+    "name": "Hotel Reservation Management",
+    "version": "0.03",
+    "author": "Serpent Consulting Services Pvt. Ltd., OpenERP SA,\
+    Odoo Community Association (OCA)",
+    "category": "Generic Modules/Hotel Reservation",
+    "images": [],
+    "website": "http://www.serpentcs.com",
+    "depends": ["hotel", "stock", 'mail'],
+    "license": "",
+    "demo": [
         "views/hotel_reservation_data.xml",
     ],
-    "data" : [
+    "data": [
         "security/ir.model.access.csv",
         "wizard/hotel_reservation_wizard.xml",
         "report/hotel_reservation_report.xml",
@@ -51,11 +48,8 @@
         "views/room_summ_view.xml",
         "views/email_temp_view.xml",
     ],
-    'js': ["static/src/js/hotel_room_summary.js", ],
     'qweb': ['static/src/xml/hotel_room_summary.xml'],
     'css': ["static/src/css/room_summary.css"],
     'installable': True,
     'auto_install': False,
 }
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
